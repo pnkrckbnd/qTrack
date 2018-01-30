@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:descendantFocusability="blocksDescendants"
+	android:orientation="horizontal">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:layout_weight="1.0"
+		android:paddingLeft="16dp">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="Track Name"
+			android:id="@+id/tracklistitem_textView_track"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:text="Artist - Album"
+				android:layout_weight="1.0"
+				android:maxLines="1"
+				android:ellipsize="marquee"
+				android:id="@+id/tracklistitem_textView_artist_album"/>
+
+			<TextView
+				android:layout_height="match_parent"
+				android:layout_width="wrap_content"
+				android:orientation="horizontal"
+				android:text="3:16"
+				android:layout_gravity="right"
+				android:id="@+id/tracklistitem_textView_duration"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<ImageButton
+		style="?android:attr/buttonBarButtonStyle"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:src="@android:drawable/ic_menu_close_clear_cancel"
+		android:layout_gravity="center_vertical"
+		android:id="@+id/tracklistitem_imageButton_menu"/>
+
+</LinearLayout>
+

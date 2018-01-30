@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ToneMaker</string>
+    <string name="app_name">qTracks</string>
     <string name="hello_world">Hello world!</string>
-
+	<string name="open_drawer">Open</string>
+	<string name="close_drawer">Close</string>
 </resources>

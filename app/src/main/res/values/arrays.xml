@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<resources>
+	<string-array name="navigation_titles">
+		<item>Artists</item>
+		<item>Albums</item>
+		<item>Tracks</item>
+		<item>Genre</item>
+		<item>Playlist</item>
+		<item>Top Ten</item>
+	</string-array>
+</resources>
