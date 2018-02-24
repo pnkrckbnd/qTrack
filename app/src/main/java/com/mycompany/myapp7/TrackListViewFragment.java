@@ -4,6 +4,7 @@ import android.view.*;
 import android.os.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
+import android.provider.*;
 
 public class TrackListViewFragment extends ListViewFragment implements OnItemClickListener, OnItemLongClickListener
 {
@@ -12,7 +13,7 @@ public class TrackListViewFragment extends ListViewFragment implements OnItemCli
 	public static TrackListViewFragment newInstance(Cursor cursor, ListViewItemClickedListener listener){
 		TrackListViewFragment f = new TrackListViewFragment();
 		f.setCursor(cursor);
-		f.setListener(listener);
+		f.listener = listener;
 		return f;
 	}
 	
@@ -31,8 +32,16 @@ public class TrackListViewFragment extends ListViewFragment implements OnItemCli
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4){
-		
+	public void onItemClick(AdapterView<?> p1, View p2, int pos, long p4){
+		Cursor c = getCursor();
+		if(c.getCount() > 0) {
+			long[] ids = new long[c.getCount()];
+			for(int i=0; i<ids.length; i++) {
+				c.moveToPosition(i);
+				ids[i] = c.getLong(c.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+			}
+			listener.onClickSetupPlayer(ids, pos);
+		}
 	}
 
 	@Override
@@ -40,7 +49,4 @@ public class TrackListViewFragment extends ListViewFragment implements OnItemCli
 		
 		return false;
 	}
-	
-	
-	
 }

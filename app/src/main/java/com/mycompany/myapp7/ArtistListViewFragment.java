@@ -9,11 +9,12 @@ import android.provider.*;
 public class ArtistListViewFragment extends ListViewFragment implements OnItemClickListener, OnItemLongClickListener
 {
 	ListViewItemClickedListener listener;
+	ArtistListCursorAdapter adapter;
 
 	public static ArtistListViewFragment newInstance(Cursor cursor, ListViewItemClickedListener listener){
 		ArtistListViewFragment f = new ArtistListViewFragment();
 		f.setCursor(cursor);
-		f.setListener(listener);
+		f.listener = listener;
 		return f;
 	}
 
@@ -24,7 +25,7 @@ public class ArtistListViewFragment extends ListViewFragment implements OnItemCl
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View v = super.onCreateView(inflater, container, savedInstanceState);
-		ArtistListCursorAdapter adapter = new ArtistListCursorAdapter(getContext(), getCursor());
+		adapter = new ArtistListCursorAdapter(getContext(), getCursor());
 		getListView().setAdapter(adapter);
 		getListView().setOnItemClickListener(this);
 		getListView().setOnItemLongClickListener(this);
@@ -33,9 +34,10 @@ public class ArtistListViewFragment extends ListViewFragment implements OnItemCl
 
 	@Override
 	public void onItemClick(AdapterView<?> p1, View p2, int pos, long p4){
-		Cursor c = ((TracksListCursorAdapter) getListView().getAdapter()).getCursor();
+		Cursor c = getCursor();
 		c.moveToPosition(pos);
-		listener.onClicked(c.getLong(c.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST_ID)));
+		long id = c.getLong(c.getColumnIndexOrThrow(MediaStore.Audio.Artists._ID));
+		listener.onClicked(id);
 	}
 
 	@Override
@@ -43,7 +45,5 @@ public class ArtistListViewFragment extends ListViewFragment implements OnItemCl
 
 		return false;
 	}
-
-
 
 }

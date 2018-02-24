@@ -42,7 +42,8 @@ public class TracksListCursorAdapter extends CursorAdapter
 		vh.track.setText(getCursor().getString(getCursor().getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)));
 		vh.artist_album.setText(getCursor().getString(getCursor().getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
 													  + " - " + getCursor().getString(getCursor().getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)));
-		vh.duration.setText(getCursor().getLong(getCursor().getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)) + "");
+		long duration = getCursor().getLong(getCursor().getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
+		vh.duration.setText(Utils.Instance().getTimeFormatted(duration));
 	}
 	
 	class ViewHolder{

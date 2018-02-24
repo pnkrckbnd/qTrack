@@ -1,47 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-	
-
-
-<android.support.v4.widget.DrawerLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="match_parent"
-	android:layout_width="match_parent"
-	android:id="@+id/main_drawerLayout"
-	android:layout_gravity="left">
-	
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content">
 
 	<LinearLayout
-		android:orientation="vertical"
-		android:layout_height="match_parent"
-		android:layout_width="match_parent">
-		<android.support.v7.widget.Toolbar
+		android:layout_height="72dp"
+		android:layout_width="match_parent"
+		android:id="@+id/mainFrameLayout1"
+		android:layout_alignParentBottom="true"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:background="#1C1C1C">
 
-			android:layout_width="match_parent"
-			android:layout_height="64dp"
+		<ImageView
+			android:layout_height="72dp"
+			android:layout_width="72dp"
+			android:src="@drawable/ic_launcher"
+			android:id="@+id/main_imageView_miniplayer_album"
+			android:layout_gravity="center_vertical"
+			android:background="#D8271C"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:orientation="vertical"
+			android:layout_toRightOf="@id/main_imageView_miniplayer_album"
+			android:layout_centerVertical="true"
+			android:layout_weight="1.0"
+			android:layout_marginLeft="8dp">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="Large Text"
+				android:textColor="#E7E7E7"
+				android:id="@+id/main_textView_miniplayer_title"/>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:text="Medium Text"
+				android:textColor="#E7E7E7"
+				android:id="@+id/main_textView_miniplayer_artist_album"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
 			android:orientation="horizontal"
-			android:layout_gravity="top|center_horizontal"
-			android:id="@+id/toolbar_layout">
-			
-		</android.support.v7.widget.Toolbar>
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true">
 
-	<FrameLayout
+			<ImageButton
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:src="@drawable/ic_action_prev"
+				android:id="@+id/main_button_miniplayer_prev"
+				android:visibility="gone"/>
+
+			<ImageButton
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_height="48dp"
+				android:layout_width="48dp"
+				android:src="@drawable/btn_play_pause"
+				android:id="@+id/main_button_miniplayer_play_pause"/>
+
+			<ImageButton
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_height="48dp"
+				android:layout_width="48dp"
+				android:src="@drawable/ic_action_next"
+				android:id="@+id/main_button_miniplayer_next"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<android.support.v4.widget.DrawerLayout
 		android:layout_height="match_parent"
 		android:layout_width="match_parent"
-		android:id="@+id/main_fragContainer"/>
-	</LinearLayout>
-	<ListView
-		android:id="@+id/main_left_drawer"
-		android:layout_width="240dp"
-		android:layout_height="match_parent"
-		android:layout_gravity="start"
-		android:choiceMode="singleChoice"
-		android:divider="#666"
-		android:dividerHeight="1dp"
-		android:background="#333"
-		android:paddingLeft="15sp"
-		android:paddingRight="15sp"/>
-	
+		android:id="@+id/main_drawerLayout"
+		android:layout_above="@id/mainFrameLayout1">
 
-</android.support.v4.widget.DrawerLayout>
-	
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_height="match_parent"
+			android:layout_width="match_parent">
+
+			<android.support.v7.widget.Toolbar
+				android:layout_width="match_parent"
+				android:layout_height="64dp"
+				android:orientation="horizontal"
+				android:layout_gravity="top|center_horizontal"
+				android:id="@+id/toolbar_layout">
+
+			</android.support.v7.widget.Toolbar>
+
+			<FrameLayout
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:id="@+id/main_fragContainer"/>
+
+		</LinearLayout>
+
+		<ListView
+			android:id="@+id/main_left_drawer"
+			android:layout_width="240dp"
+			android:layout_height="match_parent"
+			android:layout_gravity="start"
+			android:choiceMode="singleChoice"
+			android:divider="#666"
+			android:dividerHeight="1dp"
+			android:background="#333"
+			android:paddingLeft="15sp"
+			android:paddingRight="15sp"/>
+
+	</android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>
 

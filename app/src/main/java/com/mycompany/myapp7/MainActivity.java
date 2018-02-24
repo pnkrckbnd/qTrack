@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.support.v4.app.*;
 import android.database.*;
 import android.provider.*;
+import android.content.*;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity
 	ListViewItemClickedListener trackClickListener, artistClickListener, discClickListener;
 
 	long currentId = 0;
-	int fragmentIndex = 2;
+	int fragmentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -202,6 +203,15 @@ public class MainActivity extends AppCompatActivity
 		trackClickListener = new ListViewItemClickedListener(){
 
 			@Override
+			public void onClickSetupPlayer(long[] ids, int index){
+				Intent i = new Intent(MainActivity.this, PlayerActivity.class);
+				i.setAction(Constants.ACTION_PLAYER_NEW_LIST);
+				i.putExtra(Constants.EXTRA_PLAYER_TRACK_LIST, ids);
+				i.putExtra(Constants.EXTRA_PLAYER_TRACK_INDEX, index);
+				startActivity(i, null);
+			}
+			
+			@Override
 			public void onClicked(long id) {
 				try{
 					Cursor trackCursor = Utils.Instance().getTrackCursor(
@@ -213,9 +223,18 @@ public class MainActivity extends AppCompatActivity
 							MediaStore.Audio.Media.TITLE
 						)
 					);
-					Utils.Instance().ToastShort("Now Playing " + trackTitle);
+					Toast.makeText(MainActivity.this, "Now Playing " + trackTitle, Toast.LENGTH_SHORT).show();
+					
+					
 				}
 				catch(Exception e){}
+				Track[] trackList = new Track[1];
+
+				Intent i = new Intent(MainActivity.this, PlayerActivity.class);
+				i.setAction(Constants.ACTION_PLAYER_NEW_LIST);
+				i.putExtra(Constants.EXTRA_PLAYER_TRACK_LIST, trackList);
+				i.putExtra(Constants.EXTRA_PLAYER_TRACK_INDEX, 0);
+				startActivity(i, null);
 			}
 
 			@Override
@@ -225,6 +244,11 @@ public class MainActivity extends AppCompatActivity
 			}
 		};
 		artistClickListener = new ListViewItemClickedListener(){
+
+			@Override
+			public void onClickSetupPlayer(long[] ids, int index){
+				// TODO: Implement this method
+			}
 			
 			@Override
 			public void onClicked(long id){
@@ -232,19 +256,22 @@ public class MainActivity extends AppCompatActivity
 					Cursor artistCursor = Utils.Instance().getArtistCursor(
 						MediaStore.Audio.Artists._ID + " = " + id);
 				
-				artistCursor.moveToFirst();
-				String artistName = artistCursor.getString(
-					artistCursor.getColumnIndexOrThrow(
-						MediaStore.Audio.Artists.ARTIST
-					)
-				);
-				artistCursor.close();
-				Cursor discCursor = Utils.Instance().getDiscCursor(MediaStore.Audio.Albums.ARTIST + " LIKE " + artistName);
-				Fragment f = getFragmentOfType(DataType.ARTIST_DISCS, discCursor);
-
-				replaceFragment(f, artistName);
+					artistCursor.moveToFirst();
+					String artistName = artistCursor.getString(
+						artistCursor.getColumnIndexOrThrow(
+							MediaStore.Audio.Artists.ARTIST
+						)
+					);
+					artistCursor.close();
+					if(artistName.equals("<unknown>")){
+						artistName = "";
+					}
+					Cursor discCursor = Utils.Instance().getDiscCursor(MediaStore.Audio.Artists.Albums.ARTIST + " LIKE '" + artistName + "'");
+				
+					Fragment f = getFragmentOfType(DataType.ARTIST_DISCS, discCursor);
+					replaceFragment(f, artistName);
 				}
-				catch(Exception e){}
+				catch(Exception e){e.printStackTrace();}
 			}
 
 			@Override
@@ -260,6 +287,12 @@ public class MainActivity extends AppCompatActivity
 			}
 		};
 		discClickListener = new ListViewItemClickedListener(){
+
+			@Override
+			public void onClickSetupPlayer(long[] ids, int index){
+				// TODO: Implement this method
+			}
+			
 		
 			
 			public void onClicked(long id){
@@ -267,8 +300,7 @@ public class MainActivity extends AppCompatActivity
 					Fragment f = getFragmentOfType(
 						DataType.DISC_TRACKS, 
 						Utils.Instance().getTrackCursor(MediaStore.Audio.Media.ALBUM_ID + " = " + id));
-						replaceFragment(f, "Album Tracks"
-					);
+						replaceFragment(f, "Album Tracks");
 				}catch(Exception e){}
 			}
 

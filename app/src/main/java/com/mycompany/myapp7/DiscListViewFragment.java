@@ -46,6 +46,4 @@ public class DiscListViewFragment extends ListViewFragment implements OnItemClic
 		return false;
 	}
 
-
-
 }

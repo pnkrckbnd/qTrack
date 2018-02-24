@@ -10,21 +10,24 @@
 		android:layout_height="54dp"
 		android:layout_width="54dp"
 		android:id="@+id/artistlistitem_imageView_thumb"
-		android:src="@drawable/ic_launcher"/>
+		android:src="@drawable/ic_launcher"
+		android:layout_gravity="center_vertical"/>
 
 	<LinearLayout
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_width="match_parent"
 		android:orientation="vertical"
 		android:layout_weight="1.0"
-		android:paddingLeft="16dp">
+		android:paddingLeft="16dp"
+		android:gravity="center_vertical">
 
 		<TextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:text="Artist"
-			android:id="@+id/artistlistitem_textView_title"/>
+			android:id="@+id/artistlistitem_textView_title"
+			android:textStyle="bold"/>
 
 		<LinearLayout
 			android:layout_height="wrap_content"
@@ -34,7 +37,7 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:text="songs - albums"
 				android:layout_weight="1.0"
 				android:maxLines="1"
@@ -49,7 +52,7 @@
 		style="?android:attr/buttonBarButtonStyle"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
-		android:src="@android:drawable/ic_menu_close_clear_cancel"
+		android:src="@drawable/ic_action_overflow"
 		android:layout_gravity="center_vertical"
 		android:id="@+id/artistlistitem_imageButton_menu"/>
 

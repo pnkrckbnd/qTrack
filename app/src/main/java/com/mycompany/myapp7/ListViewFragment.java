@@ -4,6 +4,7 @@ import android.database.*;
 import android.view.*;
 import android.os.*;
 import android.widget.*;
+import java.util.*;
 
 public class ListViewFragment extends Fragment
 {
@@ -46,6 +47,7 @@ public class ListViewFragment extends Fragment
 }
 
 interface ListViewItemClickedListener{
+	public void onClickSetupPlayer(long[] ids, int index);
 	public void onClicked(long id);
 
 	public void onLongClicked(long id)

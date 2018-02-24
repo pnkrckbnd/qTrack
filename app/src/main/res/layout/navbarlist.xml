@@ -5,7 +5,8 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
 	android:padding="16dp"
-	android:id="@+id/navBar_bgLinLayout">
+	android:id="@+id/navBar_bgLinLayout"
+	android:background="#7C000000">
 
 	<TextView
 		android:layout_width="match_parent"
@@ -13,7 +14,8 @@
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:text="Medium Text"
 		android:id="@+id/navBar_textView"
-		android:gravity="center_vertical|center_horizontal"/>
+		android:gravity="center_vertical|center_horizontal"
+		android:textColor="#CCFFFFFF"/>
 
 </LinearLayout>
 
